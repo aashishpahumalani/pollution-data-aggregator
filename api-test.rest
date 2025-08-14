@@ -1,0 +1,43 @@
+### Pollution Data Aggregator API Tests
+
+# Base URL
+@baseUrl = http://localhost:3000
+
+
+### Get Most Polluted Cities (Default pagination)
+GET {{baseUrl}}/cities
+
+### Get Most Polluted Cities with pagination parameters
+GET {{baseUrl}}/cities?page=1&limit=5
+
+### Get Most Polluted Cities with country filter (France)
+GET {{baseUrl}}/cities?country=FR&page=1&limit=10
+
+### Get Most Polluted Cities with different country (US)
+GET {{baseUrl}}/cities?country=US&page=1&limit=5
+
+### Get second page with small limit
+GET {{baseUrl}}/cities?page=2&limit=3
+
+### Test larger limit
+GET {{baseUrl}}/cities?limit=20
+
+### Test edge cases - page 0 (should default to 1)
+GET {{baseUrl}}/cities?page=0&limit=5
+
+### Test edge cases - negative page (should default to 1)
+GET {{baseUrl}}/cities?page=-1&limit=5
+
+### Test edge cases - invalid limit (should default to 10)
+GET {{baseUrl}}/cities?page=1&limit=0
+
+### Test with custom headers
+GET {{baseUrl}}/cities
+Accept: application/json
+User-Agent: REST Client
+
+### Test 404 endpoint
+GET {{baseUrl}}/nonexistent
+
+### Test method not allowed (POST to cities)
+POST {{baseUrl}}/cities
